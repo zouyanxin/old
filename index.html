@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="基于CHARLS 2013-2020八年追踪数据的老年失能动态风险识别与长护险基金可持续性研究">
+    <title>预防为主，精准干预 - 老年失能动态风险识别研究</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div class="top-bar"></div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="brand-mark">RESEARCH PROJECT</span>
+                <span class="brand-text">老年失能动态风险识别研究</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#background" class="nav-link">背景</a>
+                <a href="#design" class="nav-link">设计</a>
+                <a href="#findings" class="nav-link">核心发现</a>
+                <a href="#risk-factors" class="nav-link">风险图谱</a>
+                <a href="#heterogeneity" class="nav-link">人群差异</a>
+                <a href="#trends" class="nav-link">时间趋势</a>
+                <a href="#robustness" class="nav-link">稳健性</a>
+                <a href="#policy" class="nav-link">政策建议</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-meta">CHARLS 2013-2020 &nbsp;·&nbsp; 8年追踪 &nbsp;·&nbsp; 3期独立验证</div>
+            <h1 class="hero-title">预防为主<span class="accent-word">·</span>精准干预<br>老年失能动态风险识别与长护险基金可持续性研究</h1>
+            <p class="hero-subtitle">基于中国健康与养老追踪调查（CHARLS）的多期实证研究</p>
+            <div class="hero-abstract">
+                本研究通过2013-2015、2015-2018、2018-2020三期独立建模，验证了抑郁与慢性病作为老年失能核心风险因素的跨期稳健性，并揭示了城乡差距持续扩大的趋势。研究为长期护理保险制度从"被动给付"向"主动预防"的转型提供了实证依据。
+            </div>
+            <div class="hero-data-strip">
+                <div class="data-item">
+                    <div class="data-label">研究期数</div>
+                    <div class="data-value" data-count="3">3</div>
+                    <div class="data-note">期独立验证 · 2013-2020</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">累计样本</div>
+                    <div class="data-value" data-count="19553">19,553</div>
+                    <div class="data-note">老年人 · 三期合计</div>
+                </div>
+                <div class="data-item accent">
+                    <div class="data-label">抑郁OR范围</div>
+                    <div class="data-value">1.54&ndash;2.65</div>
+                    <div class="data-note">三期均显著 · CV=0.25</div>
+                </div>
+                <div class="data-item accent">
+                    <div class="data-label">成本效益比</div>
+                    <div class="data-value">1 : 4.8</div>
+                    <div class="data-note">三期保守平均</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="background" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">01 &nbsp;/&nbsp; 研究背景</div>
+                <h2 class="section-title">人口老龄化与长护险制度的可持续挑战</h2>
+            </div>
+            <div class="background-layout">
+                <div class="background-text">
+                    <p>截至2023年，中国60岁以上老年人口已超<strong>2.8亿</strong>，失能老人约<strong>4,000万</strong>。长期护理保险制度自2016年试点以来，覆盖范围持续扩大，但"以付定收"的被动模式正面临日益严峻的财务压力。</p>
+                    <p>已有研究多关注失能发生后的护理给付，对<strong>失能前的可干预风险因素</strong>缺乏系统识别。抑郁、慢性病、城乡差距等因素如何影响老年失能的动态过程？哪些人群是预防性干预的最优靶点？这些问题的回答，关系到长护险制度能否从"被动给付"转向"主动预防"。</p>
+                    <p>本研究基于CHARLS 2013-2020八年追踪数据，通过<strong>三期独立建模</strong>验证核心发现的跨期稳健性，并测算预防性干预的长期成本效益，为政策制定提供实证依据。</p>
+                </div>
+                <div class="background-image">
+                    <img src="images/jaddy-liu-nk-xUZwSjR4-unsplash.jpg" alt="社区生活中的老年人">
+                    <p class="image-caption">摄影 / Jaddy Liu, Unsplash</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="design" class="section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">02 &nbsp;/&nbsp; 研究设计</div>
+                <h2 class="section-title">从数据到政策的研究链路</h2>
+                <p class="section-intro">研究采用四阶段递进式设计：从数据准备出发，经过描述与建模，到稳健性检验与因果识别，最终输出可操作的政策建议。每一阶段均通过三期数据独立验证。</p>
+            </div>
+
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="flow-step-num">STAGE I</div>
+                    <div class="flow-step-title">数据准备</div>
+                    <p class="flow-step-desc">CHARLS Wave 2-5四期面板数据清洗，构建三期独立追踪样本，剔除Wave 1-2（数据质量异常期）。</p>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-step-num">STAGE II</div>
+                    <div class="flow-step-title">实证建模</div>
+                    <p class="flow-step-desc">Logistic 回归识别风险因素，Fairlie 分解量化城乡差距来源，马尔可夫模型刻画动态转移过程。</p>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-step-num">STAGE III</div>
+                    <div class="flow-step-title">稳健性与因果</div>
+                    <p class="flow-step-desc">PSM 因果推断、Fine-Gray 竞争风险、Bootstrap 不确定性量化、模型校准与判别力评估。</p>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-step-num">STAGE IV</div>
+                    <div class="flow-step-title">政策仿真</div>
+                    <p class="flow-step-desc">压力测试评估基金可持续性，10年期动态微观仿真测算预防性干预的长期成本效益。</p>
+                </div>
+            </div>
+
+            <div class="section-header" style="margin-top: 4rem;">
+                <h2 class="section-title" style="font-size: 1.375rem;">样本特征：四期面板数据概览</h2>
+            </div>
+
+            <div class="sample-table-wrap">
+                <table class="sample-table">
+                    <thead>
+                        <tr>
+                            <th>追踪期</th>
+                            <th>样本量</th>
+                            <th>2年失能率</th>
+                            <th>平均年龄</th>
+                            <th>农村比例</th>
+                            <th>抑郁比例</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="excluded">
+                            <td>2011&ndash;2013<span class="badge-small">Wave 1&ndash;2</span></td>
+                            <td>4,876</td>
+                            <td>17.9%</td>
+                            <td>67.4 岁</td>
+                            <td>60.6%</td>
+                            <td>31.8%</td>
+                            <td>剔除（首次调查质量异常）</td>
+                        </tr>
+                        <tr>
+                            <td>2013&ndash;2015<span class="badge-small">Wave 2&ndash;3</span></td>
+                            <td>5,848</td>
+                            <td>19.6%</td>
+                            <td>67.5 岁</td>
+                            <td>61.4%</td>
+                            <td>25.1%</td>
+                            <td>纳入</td>
+                        </tr>
+                        <tr>
+                            <td>2015&ndash;2018<span class="badge-small">Wave 3&ndash;4</span></td>
+                            <td>6,316</td>
+                            <td>17.2%</td>
+                            <td>67.6 岁</td>
+                            <td>60.1%</td>
+                            <td>26.1%</td>
+                            <td>纳入</td>
+                        </tr>
+                        <tr>
+                            <td>2018&ndash;2020<span class="badge-small">Wave 4&ndash;5</span></td>
+                            <td>7,389</td>
+                            <td>19.3%</td>
+                            <td>68.3 岁</td>
+                            <td>59.6%</td>
+                            <td>28.4%</td>
+                            <td>纳入</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="sample-note">注：失能定义为ADL/IADL任一项功能受限。三期合计纳入样本 19,553 人次，作为本研究的实证基础。</p>
+
+            <div class="map-section">
+                <div class="map-header">
+                    <div class="map-header-left">
+                        <div class="map-tag">Geographic Coverage</div>
+                        <h3 class="map-title">CHARLS 样本省份覆盖与长护险试点城市</h3>
+                    </div>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <div class="legend-swatch coverage-low"></div>
+                            <span>样本量较少</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-swatch coverage-mid"></div>
+                            <span>样本量中等</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-swatch coverage-high"></div>
+                            <span>样本量较多</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot"></div>
+                            <span>长护险试点城市</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-body">
+                    <div id="chinaMap"></div>
+
+                    <aside class="map-analysis">
+                        <div class="analysis-card primary">
+                            <div class="analysis-tag">Coverage Notes</div>
+                            <h4 class="analysis-title">28 省覆盖与 5 类区域缺位</h4>
+                            <p class="analysis-text">CHARLS 抽样在<strong>东部沿海、华中、西南三大老龄化高发区</strong>密度最高，江苏、河南、四川、广东、山东等省份累计样本量在前列。</p>
+                            <p class="analysis-text">未覆盖的<strong>海南、宁夏、新疆、西藏、港澳台</strong>因调查成本与人口结构差异未纳入抽样框，研究外推时需说明这一边界。</p>
+                            <div class="analysis-stat">
+                                <div>
+                                    <div class="analysis-stat-value">28</div>
+                                </div>
+                                <div class="analysis-stat-label">省（自治区、直辖市）<br>覆盖 92% 老年人口</div>
+                            </div>
+                        </div>
+
+                        <div class="analysis-card alert">
+                            <div class="analysis-tag">Spatial Gap</div>
+                            <h4 class="analysis-title">样本密集区与试点城市的错位</h4>
+                            <p class="analysis-text">长护险首批 15 个试点中，<strong>西部仅占 3 席</strong>（成都、重庆、安庆）；而本研究显示农村 OR 持续上升的高风险地区主要分布在中西部。</p>
+                            <p class="analysis-text">这意味着<strong>政策资源与风险人群存在地理错位</strong>。试点扩面应优先考虑中西部省份的农村地区。</p>
+                            <div class="analysis-stat">
+                                <div>
+                                    <div class="analysis-stat-value">49</div>
+                                </div>
+                                <div class="analysis-stat-label">2020 年扩面后<br>试点城市总数</div>
+                            </div>
+                        </div>
+
+                        <div class="analysis-card">
+                            <div class="analysis-tag">Policy Timeline</div>
+                            <h4 class="analysis-title">长护险十年扩面进程</h4>
+                            <ul class="policy-timeline">
+                                <li class="timeline-item">
+                                    <div class="timeline-year">2016</div>
+                                    <div class="timeline-text">人社部启动首批 15 城试点（上海、青岛、南通等）</div>
+                                </li>
+                                <li class="timeline-item">
+                                    <div class="timeline-year">2018</div>
+                                    <div class="timeline-text">医保局成立，长护险纳入医保统一管理</div>
+                                </li>
+                                <li class="timeline-item highlight">
+                                    <div class="timeline-year">2020</div>
+                                    <div class="timeline-text">扩面至 49 城，覆盖人口 1.45 亿</div>
+                                </li>
+                                <li class="timeline-item">
+                                    <div class="timeline-year">2024</div>
+                                    <div class="timeline-text">"十四五"末争取覆盖城镇职工，部分省级统筹</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="analysis-card">
+                            <div class="analysis-tag">Research Implication</div>
+                            <h4 class="analysis-title">空间维度的核心结论</h4>
+                            <p class="analysis-text">三期建模显示<strong>农村 OR 从 1.18 升至 1.41</strong>。结合本图可知，城乡差距扩大的发生地主要在中部和西部农村，而这些地区的长护险覆盖最迟。</p>
+                            <p class="analysis-text">政策建议优先在<strong>中西部农村高抑郁负担省份</strong>开展预防性干预试点。</p>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="map-footer">
+                    <div class="map-footer-block">
+                        <strong>样本覆盖</strong>
+                        <p>CHARLS 调查覆盖全国 28 个省（自治区、直辖市），450 个村/居委会，约 1.7 万家户。本研究在三期面板中累计纳入 19,553 人次。</p>
+                    </div>
+                    <div class="map-footer-block">
+                        <strong>长护险试点</strong>
+                        <p>2016 年首批 15 个城市试点，2020 年扩至 49 个，2025 年起多省份逐步接入。本图标记 2024 年前后扩面后的代表性试点城市。</p>
+                    </div>
+                    <p class="map-attribution">
+                        底图来源：DataV.GeoAtlas（阿里云开放地理数据服务，<a href="https://datav.aliyun.com/portal/school/atlas/area_selector" target="_blank" rel="noopener" style="color: inherit;">datav.aliyun.com</a>），中国国界、省级行政区划数据 / 审图号：GS(2019)1822 号 / 数据时点：2024 年。本图仅用于学术研究展示，不作为行政区划官方依据。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="findings" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">03 &nbsp;/&nbsp; 核心发现</div>
+                <h2 class="section-title">三期独立验证的稳健结论</h2>
+                <p class="section-intro">通过对2013-2015、2015-2018、2018-2020三期数据的独立建模，本研究识别出抑郁与慢性病为最稳健的失能风险因素，并通过变异系数（CV）量化跨期稳定性。</p>
+            </div>
+
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <div class="finding-tag">FINDING 01</div>
+                    <div class="finding-value">1.54&ndash;2.65</div>
+                    <div class="finding-label">抑郁OR范围（三期）</div>
+                    <div class="finding-detail">三期均在p&lt;0.05水平显著，平均OR=2.00，CV=0.25。抑郁是最强且稳健的可干预风险因素。</div>
+                </div>
+                <div class="finding-card accent">
+                    <div class="finding-tag">FINDING 02</div>
+                    <div class="finding-value">1.30&ndash;1.36</div>
+                    <div class="finding-label">慢性病OR范围（三期）</div>
+                    <div class="finding-detail">平均OR=1.32，CV=0.02，三期高度一致。慢性病管理是降低失能负担的基础抓手。</div>
+                </div>
+                <div class="finding-card alert">
+                    <div class="finding-tag">FINDING 03</div>
+                    <div class="finding-value">26&ndash;31%</div>
+                    <div class="finding-label">农村抑郁老人2年失能率</div>
+                    <div class="finding-detail">60-69岁农村抑郁群体三期失能率均处于高位，平均26.8%，CV=0.08。系预防性干预的最优靶点。</div>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-tag">FINDING 04</div>
+                    <div class="finding-value">1 : 4.8</div>
+                    <div class="finding-label">十年期成本效益比</div>
+                    <div class="finding-detail">基于三期保守平均测算，预防性干预十年可节省长护险基金约950亿元，最保守情景仍达1:4.1。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="risk-factors" class="section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">04 &nbsp;/&nbsp; 风险因素图谱</div>
+                <h2 class="section-title">14项变量的跨期效应估计</h2>
+                <p class="section-intro">森林图直观呈现了控制其他协变量后，14项变量对2年失能转移的优势比及其95%置信区间。位于OR=1右侧者为风险因素，左侧者为保护因素。</p>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card full-width">
+                    <div class="chart-header">
+                        <div class="chart-tag">FIGURE 1 &nbsp;·&nbsp; 风险因素森林图</div>
+                        <div class="chart-title">三期Logistic回归OR值与95%置信区间</div>
+                        <div class="chart-desc">包含14个核心解释变量，按2018-2020期OR值大小排列。点表示OR估计值，横线表示95%置信区间。</div>
+                    </div>
+                    <div id="forestChart" class="chart-container" style="height: 540px;"></div>
+                    <div class="chart-source">数据来源：CHARLS 2013-2020 / 模型：多元Logistic回归 / 因变量：2年失能转移（H&rarr;D）</div>
+                </div>
+            </div>
+
+            <div class="charts-grid" style="margin-top: 1.5rem;">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-tag">FIGURE 2 &nbsp;·&nbsp; 关键OR三期对比</div>
+                        <div class="chart-title">抑郁、慢性病、农村三大核心变量</div>
+                        <div class="chart-desc">三期独立估计的OR值与显著性水平</div>
+                    </div>
+                    <div id="keyORChart" class="chart-container"></div>
+                    <div class="chart-source">显著性：*p&lt;0.05, **p&lt;0.01, ***p&lt;0.001 / 标注于柱顶</div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-tag">FIGURE 3 &nbsp;·&nbsp; Bootstrap 不确定性</div>
+                        <div class="chart-title">关键OR的1,000次重抽样置信区间</div>
+                        <div class="chart-desc">Bootstrap重抽样1,000次得到的OR分布</div>
+                    </div>
+                    <div id="bootstrapChart" class="chart-container"></div>
+                    <div class="chart-source">方法：Bootstrap重抽样（n=1,000）/ 报告均值与2.5-97.5百分位</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="heterogeneity" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">05 &nbsp;/&nbsp; 人群异质性</div>
+                <h2 class="section-title">谁在承受最高的失能风险？</h2>
+                <p class="section-intro">将样本按城乡、抑郁状态、年龄三维度交叉分组，绘制热力图揭示12个亚组的2年失能转移概率。农村抑郁高龄群体的风险显著高于其他亚组。</p>
+            </div>
+
+            <div class="split-figure">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-tag">FIGURE 4 &nbsp;·&nbsp; 失能转移热力图</div>
+                        <div class="chart-title">12 亚组的2年失能率（2018-2020期）</div>
+                        <div class="chart-desc">城乡 × 抑郁状态 × 年龄段，颜色深度对应失能率</div>
+                    </div>
+                    <div id="heatmapChart" class="chart-container" style="height: 380px;"></div>
+                    <div class="chart-source">数据来源：CHARLS 2018-2020 / 计算方法：分层转移概率 / 单位：%</div>
+                </div>
+                <div class="split-text">
+                    <h3>核心解读</h3>
+                    <p>热力图清晰呈现了三个层次的风险阶梯：<strong>抑郁状态 &gt; 农村身份 &gt; 高龄</strong>。在60-69岁组中，仅有抑郁就使失能率从14.9%上升至26.2%（农村）或8.4%上升至23.7%（城市）。</p>
+                    <p>最具政策意义的是<strong>"农村+抑郁+80岁+"</strong>这一极端高风险亚组，2018-2020期失能率达<strong>54.0%</strong>，远超其他任何亚组。然而该群体的样本规模较小（n=63），在传统资源配置中往往被忽视。</p>
+                    <div class="callout alert">
+                        政策含义：长护险预防性服务应优先识别这类"低人数、高风险"的极端亚组，配套定向上门服务，避免他们在等待政策覆盖中错过最佳干预窗口。
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid" style="margin-top: 1.5rem;">
+                <div class="chart-card full-width">
+                    <div class="chart-header">
+                        <div class="chart-tag">FIGURE 5 &nbsp;·&nbsp; Fairlie 分解</div>
+                        <div class="chart-title">城乡失能差距的来源分解（三期对比）</div>
+                        <div class="chart-desc">各因素对城乡失能率差距的贡献百分比，正值=扩大差距，负值=缩小差距</div>
+                    </div>
+                    <div id="fairlieChart" class="chart-container" style="height: 360px;"></div>
+                    <div class="chart-source">方法：Fairlie 非线性分解 / 仅显示主要贡献变量 / 抑郁贡献度从3.9%上升至9.0%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="trends" class="section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">06 &nbsp;/&nbsp; 时间趋势</div>
+                <h2 class="section-title">城乡差距的扩大与抑郁影响力的上升</h2>
+                <p class="section-intro">三期独立分析不仅验证了核心结论的稳健性，更揭示了两个值得政策重点关注的时间趋势。</p>
+            </div>
+
+            <div class="trend-statements">
+                <div class="trend-statement alert">
+                    <div class="trend-statement-tag">TREND 01 / 城乡差距扩大</div>
+                    <div class="trend-statement-data">1.18 &rarr; 1.28 &rarr; 1.41</div>
+                    <p class="trend-statement-text">控制其他因素后，农村相对于城市的失能OR值从2013-2015期的1.18上升至2018-2020期的1.41，上升幅度达<strong>19.5%</strong>。农村失能风险的相对劣势持续扩大。</p>
+                </div>
+                <div class="trend-statement">
+                    <div class="trend-statement-tag">TREND 02 / 抑郁贡献度上升</div>
+                    <div class="trend-statement-data">3.9% &rarr; 6.0% &rarr; 9.0%</div>
+                    <p class="trend-statement-text">Fairlie分解显示，抑郁对城乡失能差距的解释贡献度从3.9%上升至9.0%。这意味着抑郁干预对缩小城乡健康不平等的<strong>政策杠杆作用日益增强</strong>。</p>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card full-width">
+                    <div class="chart-header">
+                        <div class="chart-tag">FIGURE 6 &nbsp;·&nbsp; 跨期趋势综合图</div>
+                        <div class="chart-title">核心指标的三期时间趋势</div>
+                        <div class="chart-desc">抑郁OR、慢性病OR、农村OR与抑郁Fairlie贡献度的跨期变动</div>
+                    </div>
+                    <div id="trendsChart" class="chart-container large"></div>
+                    <div class="chart-source">数据来源：CHARLS 2013-2020 / 三期独立建模 / 模型设定与控制变量保持一致</div>
+                </div>
+            </div>
+
+            <div class="charts-grid" style="margin-top: 1.5rem;">
+                <div class="chart-card full-width">
+                    <div class="chart-header">
+                        <div class="chart-tag">FIGURE 7 &nbsp;·&nbsp; 10年动态微观仿真</div>
+                        <div class="chart-title">三期参数下的长期失能率轨迹</div>
+                        <div class="chart-desc">基于三期不同参数设定，模拟未来10年的累积失能率变化路径</div>
+                    </div>
+                    <div id="microsimChart" class="chart-container large"></div>
+                    <div class="chart-source">方法：动态微观仿真 / 模拟期：10年 / 干预启动：第1年</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="robustness" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">07 &nbsp;/&nbsp; 稳健性与预测能力</div>
+                <h2 class="section-title">从模型校准到政策仿真的全链路验证</h2>
+                <p class="section-intro">研究通过多重方法对结论的稳健性进行交叉验证，包括预测模型的判别力评估、压力测试下的成本效益分析、以及Bootstrap不确定性量化。</p>
+            </div>
+
+            <div class="robustness-strip">
+                <div class="robustness-cell">
+                    <div class="robustness-label">AUC（三期平均）</div>
+                    <div class="robustness-value">0.725</div>
+                    <div class="robustness-note">良好的判别能力<br>0.71 / 0.71 / 0.75</div>
+                </div>
+                <div class="robustness-cell">
+                    <div class="robustness-label">Brier Score（三期）</div>
+                    <div class="robustness-value secondary">0.130</div>
+                    <div class="robustness-note">校准度优良<br>跨期差异 &lt; 0.002</div>
+                </div>
+                <div class="robustness-cell">
+                    <div class="robustness-label">最保守 CBR</div>
+                    <div class="robustness-value alert">1 : 4.15</div>
+                    <div class="robustness-note">2015-2018期参数<br>仍显著为正</div>
+                </div>
+                <div class="robustness-cell">
+                    <div class="robustness-label">CV（慢性病OR）</div>
+                    <div class="robustness-value secondary">0.02</div>
+                    <div class="robustness-note">极度跨期一致<br>三期OR：1.30/1.30/1.36</div>
+                </div>
+            </div>
+
+            <div class="charts-grid" style="margin-top: 2rem;">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-tag">FIGURE 8 &nbsp;·&nbsp; 模型预测能力</div>
+                        <div class="chart-title">AUC 与 Brier Score 三期对比</div>
+                        <div class="chart-desc">判别力（AUC，越高越好）与校准度（Brier，越低越好）</div>
+                    </div>
+                    <div id="aucChart" class="chart-container"></div>
+                    <div class="chart-source">方法：5折交叉验证 / 10次重复</div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-tag">FIGURE 9 &nbsp;·&nbsp; 压力测试</div>
+                        <div class="chart-title">三期成本效益比较（亿元）</div>
+                        <div class="chart-desc">干预成本、节省金额与最终成本效益比</div>
+                    </div>
+                    <div id="cbrChart" class="chart-container"></div>
+                    <div class="chart-source">情景：覆盖60-69岁农村抑郁老人 / 干预效果：Δ抑郁=20%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="policy" class="section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">08 &nbsp;/&nbsp; 政策建议</div>
+                <h2 class="section-title">从被动给付到主动预防的制度路径</h2>
+                <p class="section-intro">基于实证结果，提出长护险制度改革的四项建议。</p>
+            </div>
+
+            <ol class="policy-list">
+                <li class="policy-item">
+                    <div class="policy-content">
+                        <h3>将心理健康筛查纳入长护险预防服务包</h3>
+                        <p>抑郁OR在三期均显著（1.54-2.65），是<strong>最强的可干预风险因素</strong>。建议将PHQ-9或CES-D等标准化抑郁筛查工具纳入长护险预防性服务清单，对筛查阳性者提供分级心理干预与社会支持。</p>
+                    </div>
+                </li>
+                <li class="policy-item">
+                    <div class="policy-content">
+                        <h3>优先覆盖农村高风险人群，缩小城乡差距</h3>
+                        <p>农村OR持续上升（1.18&rarr;1.41），城乡差距呈扩大趋势。建议在长护险扩面过程中<strong>向农村倾斜</strong>，重点针对60-69岁农村抑郁老人开展靶向干预，该群体两年失能率高达26-31%。</p>
+                    </div>
+                </li>
+                <li class="policy-item">
+                    <div class="policy-content">
+                        <h3>建立基于风险预测的精准筹资机制</h3>
+                        <p>预测模型平均AUC=0.725，具备良好的判别力。建议参考国际经验，建立<strong>动态风险评估与差异化筹资</strong>机制，对高风险人群提前提供干预资源，从源头控制基金支出增长。</p>
+                    </div>
+                </li>
+                <li class="policy-item">
+                    <div class="policy-content">
+                        <h3>制度化多期数据监测与政策评估</h3>
+                        <p>本研究证明三期独立验证可有效识别趋势变化。建议建立<strong>长护险政策的多期评估机制</strong>，每2-3年开展一次跨期稳健性检验，及时调整政策参数，避免单期数据带来的偏误。</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="team" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">09 &nbsp;/&nbsp; 研究团队</div>
+                <h2 class="section-title">跨学科研究团队</h2>
+                <p class="section-intro">本研究由公共卫生、卫生经济、数据科学背景的研究人员协同完成。</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-photo">
+                        <div class="team-photo-placeholder">A</div>
+                    </div>
+                    <div class="team-name">研究负责人</div>
+                    <div class="team-role">PROJECT LEAD</div>
+                    <p class="team-bio">负责研究设计、方法学框架与政策建议的整体规划。长期关注老龄健康政策与长期护理保险制度。</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo">
+                        <div class="team-photo-placeholder">B</div>
+                    </div>
+                    <div class="team-name">数据分析负责人</div>
+                    <div class="team-role">DATA SCIENCE</div>
+                    <p class="team-bio">主导CHARLS数据清洗、多期建模与不确定性量化。专长于因果推断与风险预测模型。</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo">
+                        <div class="team-photo-placeholder">C</div>
+                    </div>
+                    <div class="team-name">政策研究协作</div>
+                    <div class="team-role">POLICY RESEARCH</div>
+                    <p class="team-bio">负责政策语境梳理与研究成果的政策转化。深耕社会保险与公共卫生政策研究。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>关于本研究</h4>
+                    <p>《预防为主，精准干预：老年失能动态风险识别与长护险基金可持续性研究》是一项基于CHARLS 2013-2020八年追踪数据的多期实证研究。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>数据来源</h4>
+                    <ul>
+                        <li>CHARLS 2013-2020</li>
+                        <li>北大数字普惠金融指数</li>
+                        <li>中国统计年鉴 2023</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>方法支持</h4>
+                    <ul>
+                        <li>Logistic回归</li>
+                        <li>Fairlie分解</li>
+                        <li>倾向得分匹配</li>
+                        <li>Fine-Gray模型</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关键产出</h4>
+                    <ul>
+                        <li>三期建模结果</li>
+                        <li>稳健性检验报告</li>
+                        <li>政策建议清单</li>
+                        <li>动态仿真模型</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-cite">建议引用：本研究项目（2026）. 老年失能动态风险识别与长护险基金可持续性研究.</div>
+                <div>&copy; 2026 RESEARCH PROJECT</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
