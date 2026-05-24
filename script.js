@@ -923,9 +923,21 @@ function initChinaMap() {
         { name: '汉中',     value: [107.02, 33.07] }
     ];
 
-    // 加载 DataV 中国地图 GeoJSON（一次性 fetch + register）
-    fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
-        .then(r => r.json())
+    // 加载中国地图 GeoJSON：本地优先，失败则回退到 DataV CDN
+    function loadGeoJson() {
+        return fetch('data/china.json')
+            .then(r => {
+                if (!r.ok) throw new Error('local not found: ' + r.status);
+                return r.json();
+            })
+            .catch(err => {
+                console.warn('Local GeoJSON failed, falling back to DataV CDN:', err);
+                return fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+                    .then(r => r.json());
+            });
+    }
+
+    loadGeoJson()
         .then(geoJson => {
             echarts.registerMap('china', geoJson);
 
@@ -1031,7 +1043,7 @@ function initChinaMap() {
         })
         .catch(err => {
             el.innerHTML = '<div style="padding: 3rem; text-align: center; color: #6B7280; font-family: ' + FONT + ';">' +
-                           '地图数据加载失败，请检查网络连接。<br/><small>底图依赖 DataV.GeoAtlas 在线服务</small></div>';
+                           '地图加载失败，请刷新页面重试。<br/><small style="color: #9CA3AF;">' + (err.message || err) + '</small></div>';
             console.error('Map load failed:', err);
         });
 }
