@@ -972,6 +972,8 @@ function initChinaMap() {
                 geo: {
                     map: 'china',
                     roam: false,
+                    zlevel: 0,
+                    z: 1,
                     label: { show: false },
                     itemStyle: {
                         areaColor: '#F4F4F0',
@@ -989,6 +991,8 @@ function initChinaMap() {
                         type: 'map',
                         map: 'china',
                         geoIndex: 0,
+                        zlevel: 1,
+                        z: 2,
                         data: provinceData,
                         label: { show: false },
                         itemStyle: {
@@ -1015,28 +1019,48 @@ function initChinaMap() {
                         type: 'effectScatter',
                         coordinateSystem: 'geo',
                         data: pilotCities,
-                        symbolSize: 7,
+                        symbol: 'circle',
+                        symbolSize: 11,
                         showEffectOn: 'render',
                         rippleEffect: {
                             brushType: 'stroke',
-                            scale: 3,
-                            period: 4
+                            scale: 4,
+                            period: 3,
+                            color: COLORS.alert
                         },
                         itemStyle: {
                             color: COLORS.alert,
-                            shadowBlur: 6,
-                            shadowColor: 'rgba(231, 111, 81, 0.4)'
+                            borderColor: '#FFFFFF',
+                            borderWidth: 2,
+                            shadowBlur: 8,
+                            shadowColor: 'rgba(231, 111, 81, 0.55)'
                         },
                         label: {
                             show: true,
                             position: 'right',
                             formatter: '{b}',
-                            fontSize: 10,
+                            fontSize: 11,
+                            fontWeight: 600,
                             color: COLORS.text,
                             fontFamily: FONT,
-                            distance: 6
+                            distance: 8,
+                            backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                            padding: [2, 5],
+                            borderRadius: 2
                         },
-                        zlevel: 2
+                        emphasis: {
+                            scale: 1.4,
+                            label: {
+                                fontSize: 12,
+                                fontWeight: 700,
+                                backgroundColor: '#FFFFFF',
+                                borderColor: COLORS.alert,
+                                borderWidth: 1
+                            }
+                        },
+                        zlevel: 5,
+                        z: 10,
+                        silent: false
                     }
                 ]
             });
