@@ -105,23 +105,15 @@ function initForestChart() {
     const chart = echarts.init(el, null, { renderer: 'svg' });
     window._charts.forest = chart;
 
-    // 2018-2020 期数据，按OR值排序
+    // 2018-2020 期数据（v2版本），按OR值排序
     const data = [
-        { name: '抑郁', or: 1.812, lo: 1.516, hi: 2.167, sig: '***' },
-        { name: '农村', or: 1.407, lo: 1.161, hi: 1.705, sig: '***' },
-        { name: '慢性病数量', or: 1.310, lo: 1.251, hi: 1.371, sig: '***' },
-        { name: '与子女同住', or: 1.292, lo: 1.080, hi: 1.547, sig: '**' },
-        { name: '吸烟', or: 1.165, lo: 0.933, hi: 1.455, sig: '' },
-        { name: '饮酒', or: 1.114, lo: 0.911, hi: 1.362, sig: '' },
-        { name: '医疗保险', or: 1.066, lo: 0.601, hi: 1.893, sig: '' },
-        { name: '年龄', or: 1.030, lo: 1.015, hi: 1.046, sig: '***' },
-        { name: '已婚', or: 0.972, lo: 0.933, hi: 1.012, sig: '' },
-        { name: '认知评分', or: 0.977, lo: 0.958, hi: 0.995, sig: '*' },
-        { name: '家庭收入(对数)', or: 0.918, lo: 0.880, hi: 0.958, sig: '***' },
-        { name: '低教育', or: 0.914, lo: 0.824, hi: 1.014, sig: '' },
-        { name: '养老保险', or: 0.824, lo: 0.612, hi: 1.109, sig: '' },
-        { name: '无规律运动', or: 0.795, lo: 0.652, hi: 0.971, sig: '*' },
-        { name: '女性', or: 0.778, lo: 0.624, hi: 0.971, sig: '*' }
+        { name: '抑郁', or: 1.638, lo: 1.435, hi: 1.869, sig: '***' },
+        { name: '农村', or: 1.378, lo: 1.211, hi: 1.569, sig: '***' },
+        { name: '慢性病数量', or: 1.245, lo: 1.203, hi: 1.289, sig: '***' },
+        { name: '年龄', or: 1.029, lo: 1.014, hi: 1.044, sig: '***' },
+        { name: '认知评分', or: 0.964, lo: 0.952, hi: 0.977, sig: '***' },
+        { name: '家庭收入(对数)', or: 0.929, lo: 0.892, hi: 0.968, sig: '***' },
+        { name: '女性', or: 0.550, lo: 0.455, hi: 0.664, sig: '***' }
     ];
 
     // 反转便于上方显示风险因素
@@ -276,9 +268,9 @@ function initKeyORChart() {
                 name: '抑郁',
                 type: 'bar',
                 data: [
-                    { value: 2.649, label: { formatter: '2.65***' } },
-                    { value: 1.541, label: { formatter: '1.54*' } },
-                    { value: 1.812, label: { formatter: '1.81***' } }
+                    { value: 1.772, label: { formatter: '1.77***' } },
+                    { value: 1.579, label: { formatter: '1.58***' } },
+                    { value: 1.638, label: { formatter: '1.64***' } }
                 ],
                 itemStyle: { color: COLORS.primary },
                 barWidth: 22,
@@ -288,9 +280,9 @@ function initKeyORChart() {
                 name: '慢性病数量',
                 type: 'bar',
                 data: [
-                    { value: 1.359, label: { formatter: '1.36***' } },
-                    { value: 1.302, label: { formatter: '1.30***' } },
-                    { value: 1.310, label: { formatter: '1.31***' } }
+                    { value: 1.333, label: { formatter: '1.33***' } },
+                    { value: 1.226, label: { formatter: '1.23***' } },
+                    { value: 1.245, label: { formatter: '1.25***' } }
                 ],
                 itemStyle: { color: COLORS.secondary },
                 barWidth: 22,
@@ -300,9 +292,9 @@ function initKeyORChart() {
                 name: '农村',
                 type: 'bar',
                 data: [
-                    { value: 1.179, label: { formatter: '1.18' } },
-                    { value: 1.280, label: { formatter: '1.28' } },
-                    { value: 1.407, label: { formatter: '1.41***' } }
+                    { value: 1.429, label: { formatter: '1.43***' } },
+                    { value: 1.260, label: { formatter: '1.26**' } },
+                    { value: 1.378, label: { formatter: '1.38***' } }
                 ],
                 itemStyle: { color: COLORS.alert },
                 barWidth: 22,
@@ -441,16 +433,16 @@ function initHeatmapChart() {
     const chart = echarts.init(el, null, { renderer: 'svg' });
     window._charts.heatmap = chart;
 
-    // 行：人群类型；列：年龄段；值：失能率%
+    // 行：人群类型；列：年龄段；值：失能率%（v2数据，2018-2020期）
     const groups = ['城市·非抑郁', '城市·抑郁', '农村·非抑郁', '农村·抑郁'];
     const ages = ['60-69 岁', '70-79 岁', '80 岁+'];
-    // 2018-2020 数据
+    // 2018-2020 v2数据
     const heatData = [
         // [colIdx, rowIdx, value]
-        [0, 0, 8.4],  [1, 0, 17.9], [2, 0, 26.3],
-        [0, 1, 23.7], [1, 1, 33.9], [2, 1, 29.5],
-        [0, 2, 14.9], [1, 2, 23.1], [2, 2, 30.0],
-        [0, 3, 26.2], [1, 3, 31.0], [2, 3, 54.0]
+        [0, 0, 15.6],  [1, 0, 25.7], [2, 0, 44.9],
+        [0, 1, 36.0], [1, 1, 43.0], [2, 1, 42.3],
+        [0, 2, 22.9], [1, 2, 35.9], [2, 2, 51.4],
+        [0, 3, 36.2], [1, 3, 46.9], [2, 3, 79.3]
     ];
 
     chart.setOption({
@@ -527,11 +519,11 @@ function initFairlieChart() {
     const chart = echarts.init(el, null, { renderer: 'svg' });
     window._charts.fairlie = chart;
 
-    // 选取主要变量在三期的贡献度（%）
-    const vars = ['家庭收入(对数)', '低教育', '抑郁', '认知能力', '与子女同住', '吸烟', '已婚', '无规律运动', '慢性病数量'];
-    const series2013 = [12.0, 14.3, 3.9, 21.9, 2.2, -1.3, 1.0, 7.6, -22.4];
-    const series2015 = [14.2, 21.1, 6.0, 17.3, -2.7, 0.2, -4.0, -11.9, -15.2];
-    const series2018 = [20.3, 9.1, 9.0, 6.7, -0.4, 1.4, 2.1, -5.1, -20.0];
+    // 选取主要变量在三期的贡献度（%）（v2数据）
+    const vars = ['家庭收入(对数)', '认知能力', '低教育', '抑郁', '慢性病数量'];
+    const series2013 = [1.1, 18.1, 7.0, 9.2, -13.4];
+    const series2015 = [3.2, 27.3, 11.0, 8.0, -12.9];
+    const series2018 = [11.2, 13.7, 5.2, 7.2, -9.5];
 
     chart.setOption({
         textStyle: { fontFamily: FONT, color: COLORS.text },
@@ -637,28 +629,28 @@ function initTrendsChart() {
         ],
         series: [
             {
-                name: '抑郁 OR', type: 'line', data: [2.649, 1.541, 1.812],
+                name: '抑郁 OR', type: 'line', data: [1.772, 1.579, 1.638],
                 lineStyle: { color: COLORS.primary, width: 2.5 },
                 itemStyle: { color: COLORS.primary },
                 symbol: 'circle', symbolSize: 8,
                 label: { show: true, position: 'top', formatter: '{c}', color: COLORS.primary, fontSize: 12, fontWeight: 600 }
             },
             {
-                name: '慢性病 OR', type: 'line', data: [1.359, 1.302, 1.310],
+                name: '慢性病 OR', type: 'line', data: [1.333, 1.226, 1.245],
                 lineStyle: { color: COLORS.secondary, width: 2.5 },
                 itemStyle: { color: COLORS.secondary },
                 symbol: 'circle', symbolSize: 8,
                 label: { show: true, position: 'bottom', formatter: '{c}', color: COLORS.secondary, fontSize: 12, fontWeight: 600 }
             },
             {
-                name: '农村 OR', type: 'line', data: [1.179, 1.280, 1.407],
+                name: '农村 OR', type: 'line', data: [1.429, 1.260, 1.378],
                 lineStyle: { color: COLORS.alert, width: 2.5 },
                 itemStyle: { color: COLORS.alert },
                 symbol: 'circle', symbolSize: 8,
                 label: { show: true, position: 'top', formatter: '{c}', color: COLORS.alert, fontSize: 12, fontWeight: 600 }
             },
             {
-                name: '抑郁 Fairlie 贡献度', type: 'line', yAxisIndex: 1, data: [3.9, 6.0, 9.0],
+                name: '抑郁 Fairlie 贡献度', type: 'line', yAxisIndex: 1, data: [9.2, 8.0, 7.2],
                 lineStyle: { color: COLORS.primaryLight, width: 2, type: 'dashed' },
                 itemStyle: { color: COLORS.primaryLight },
                 symbol: 'rect', symbolSize: 8,
@@ -839,7 +831,7 @@ function initCBRChart() {
             {
                 name: '节省金额（亿元）',
                 type: 'bar',
-                data: [1306.8, 748.3, 932.3],
+                data: [889.5, 730.0, 862.4],
                 itemStyle: { color: COLORS.primary },
                 barWidth: 22,
                 label: { show: true, position: 'top', formatter: function(p) { return p.value.toFixed(0); }, color: COLORS.primary, fontSize: 11, fontWeight: 600 }
@@ -847,7 +839,7 @@ function initCBRChart() {
             {
                 name: '干预成本（亿元）',
                 type: 'bar',
-                data: [184.1, 180.2, 198.2],
+                data: [150.3, 155.8, 170.6],
                 itemStyle: { color: COLORS.secondaryLight },
                 barWidth: 22,
                 label: { show: true, position: 'top', formatter: function(p) { return p.value.toFixed(0); }, color: COLORS.secondary, fontSize: 11, fontWeight: 600 }
@@ -856,12 +848,12 @@ function initCBRChart() {
                 name: '成本效益比',
                 type: 'line',
                 yAxisIndex: 1,
-                data: [7.10, 4.15, 4.70],
+                data: [5.9, 4.7, 5.1],
                 lineStyle: { color: COLORS.alert, width: 2 },
                 itemStyle: { color: COLORS.alert },
                 symbol: 'diamond',
                 symbolSize: 10,
-                label: { show: true, position: 'top', formatter: function(p) { return '1 : ' + p.value.toFixed(2); }, color: COLORS.alert, fontSize: 11, fontWeight: 600 }
+                label: { show: true, position: 'top', formatter: function(p) { return '1 : ' + p.value.toFixed(1); }, color: COLORS.alert, fontSize: 11, fontWeight: 600 }
             }
         ]
     });
@@ -1071,3 +1063,256 @@ function initChinaMap() {
             console.error('Map load failed:', err);
         });
 }
+
+// =====================================================
+// 风险评分卡 (Risk Scorecard) — 09 节
+// 基于三期独立 Logistic 回归（2013-2015 / 2015-2018 / 2018-2020）
+// 输入一次 → 同时输出三期概率 → 共识等级
+// =====================================================
+(function initScorecard() {
+    const formEl = document.getElementById('scForm');
+    if (!formEl) return;
+
+    // ---------- 三期 OR 系数（来源: v2数据，multi_period_logistic_results.csv）----------
+    const PERIODS = [
+        {
+            id: 'p1', name: '2013-2015',
+            beta: {
+                intercept: -2.559,
+                age:        Math.log(1.0452),
+                gender:     Math.log(0.632),
+                rural:      Math.log(1.429),
+                edu:        Math.log(1.260),
+                depressed:  Math.log(1.772),
+                chronic:    Math.log(1.333),
+                smoke:      Math.log(1.048),
+            },
+            target_rate: 0.269,
+        },
+        {
+            id: 'p2', name: '2015-2018',
+            beta: {
+                intercept: -2.357,
+                age:        Math.log(1.0508),
+                gender:     Math.log(0.627),
+                rural:      Math.log(1.260),
+                edu:        Math.log(1.259),
+                depressed:  Math.log(1.579),
+                chronic:    Math.log(1.226),
+                smoke:      Math.log(1.167),
+            },
+            target_rate: 0.247,
+        },
+        {
+            id: 'p3', name: '2018-2020',
+            beta: {
+                intercept: -2.281,
+                age:        Math.log(1.0590),
+                gender:     Math.log(0.550),
+                rural:      Math.log(1.378),
+                edu:        Math.log(1.259),
+                depressed:  Math.log(1.638),
+                chronic:    Math.log(1.245),
+                smoke:      Math.log(1.111),
+            },
+            target_rate: 0.277,
+        },
+    ];
+
+    // ---------- 单期预测 ----------
+    function predictPeriod(beta, x) {
+        const ageOff = x.age - 60;
+        const logit = beta.intercept
+            + beta.age * ageOff
+            + beta.gender * x.gender
+            + beta.rural * x.rural
+            + beta.edu * x.edu
+            + beta.depressed * x.depressed
+            + beta.chronic * x.chronic
+            + beta.smoke * x.smoke;
+        return 1 / (1 + Math.exp(-logit));
+    }
+
+    // ---------- 概率 → 风险等级 ----------
+    function tierOf(p) {
+        if (p < 0.15) return { tier: 'L', name: '低风险', cls: 'low' };
+        if (p < 0.30) return { tier: 'M', name: '中风险', cls: 'medium' };
+        return { tier: 'H', name: '高风险', cls: 'high' };
+    }
+
+    // ---------- 三期共识等级（多数派 / 中位） ----------
+    function consensusOf(probs) {
+        const tiers = probs.map(tierOf);
+        const counts = { L: 0, M: 0, H: 0 };
+        tiers.forEach(t => counts[t.tier]++);
+        // 多数派
+        let majTier = null;
+        if (counts.L >= 2) majTier = 'L';
+        else if (counts.M >= 2) majTier = 'M';
+        else if (counts.H >= 2) majTier = 'H';
+
+        if (majTier) {
+            const t = tiers.find(t => t.tier === majTier);
+            return { ...t, mode: 'majority' };
+        }
+        // 三期都不同（L, M, H 各一）→ 取中位数（按概率排序）
+        const sorted = [...probs].sort((a, b) => a - b);
+        const median = sorted[1];
+        return { ...tierOf(median), mode: 'median' };
+    }
+
+    // ---------- 干预建议 ----------
+    const ACTIONS = {
+        low: [
+            '维持当前生活方式：定期参加社区活动、规律作息',
+            '每年 1 次 CES-D-10 心理健康自评',
+            '关注血压、血糖等基础慢病指标',
+        ],
+        medium: [
+            '建议每 6 个月开展一次 ADL/IADL 与 CES-D 联合评估',
+            '社区卫生服务中心建立"中风险"档案，接入家庭医生签约',
+            '抑郁阳性者优先纳入心理咨询或团体活动',
+            '指导慢病自我管理（高血压、糖尿病记录与服药提醒）',
+        ],
+        high: [
+            '<strong>纳入长护险预防服务包</strong>，每 3 个月入户评估一次',
+            '抑郁干预：转介心理科或推进 PHQ-9 二次筛查 + 认知行为干预',
+            '强化慢病管理：药物依从性追踪、家庭血压计配置',
+            '功能康复：建议接入物理治疗、平衡训练、力量训练',
+            '社会支持：动员家庭、邻里或志愿者陪伴，避免社交退缩',
+        ],
+    };
+
+    // ---------- 渲染结果 ----------
+    function render(input) {
+        const probs = PERIODS.map(p => predictPeriod(p.beta, input));
+        const tiers = probs.map(tierOf);
+        const consensus = consensusOf(probs);
+
+        // 共识 banner
+        const cBadge = document.getElementById('rConsensusBadge');
+        cBadge.textContent = consensus.tier;
+        cBadge.className = 'consensus-tier-badge ' + consensus.cls;
+        document.getElementById('rConsensusName').textContent = consensus.name;
+        const meanP = probs.reduce((s, x) => s + x, 0) / probs.length;
+        document.getElementById('rConsensusProb').textContent =
+            `三期平均概率 ${(meanP * 100).toFixed(1)}% · 三期均同等级` +
+            (consensus.mode === 'majority' ? '（多数派一致）' : '（三期分歧，取中位）');
+        // CV
+        const sd = Math.sqrt(probs.reduce((s, x) => s + (x - meanP) ** 2, 0) / probs.length);
+        const cv = (sd / meanP);
+        document.getElementById('rConsensusCV').innerHTML =
+            `<strong>CV ${cv.toFixed(2)}</strong>跨期变异`;
+
+        // 三期面板
+        PERIODS.forEach((p, i) => {
+            const probEl = document.getElementById(`rProb_${p.id}`);
+            const barEl = document.getElementById(`rBar_${p.id}`);
+            const tierEl = document.getElementById(`rTier_${p.id}`);
+            probEl.textContent = `${(probs[i] * 100).toFixed(1)}%`;
+            // 进度条最大映射 60%
+            const w = Math.min(probs[i] / 0.60, 1) * 100;
+            barEl.style.width = w + '%';
+            barEl.className = 'period-bar-fill ' + tiers[i].cls;
+            tierEl.textContent = tiers[i].name;
+            tierEl.className = 'period-tier ' + tiers[i].cls;
+        });
+
+        // 风险拆解（用三期平均 OR）
+        const meanBeta = {
+            intercept: PERIODS.reduce((s, p) => s + p.beta.intercept, 0) / 3,
+            age:       PERIODS.reduce((s, p) => s + p.beta.age, 0) / 3,
+            gender:    PERIODS.reduce((s, p) => s + p.beta.gender, 0) / 3,
+            rural:     PERIODS.reduce((s, p) => s + p.beta.rural, 0) / 3,
+            edu:       PERIODS.reduce((s, p) => s + p.beta.edu, 0) / 3,
+            depressed: PERIODS.reduce((s, p) => s + p.beta.depressed, 0) / 3,
+            chronic:   PERIODS.reduce((s, p) => s + p.beta.chronic, 0) / 3,
+            smoke:     PERIODS.reduce((s, p) => s + p.beta.smoke, 0) / 3,
+        };
+        const ageOff = input.age - 60;
+        const breakdown = [
+            { label: '基线截距 (60岁参考)', pts: meanBeta.intercept },
+            { label: `年龄 (${input.age} 岁)`, pts: meanBeta.age * ageOff },
+            { label: input.gender === 1 ? '女性' : '男性', pts: input.gender === 1 ? meanBeta.gender : 0 },
+            { label: input.rural === 1 ? '农村居住' : '城市居住', pts: input.rural === 1 ? meanBeta.rural : 0 },
+            { label: input.edu === 1 ? '低教育水平' : '初中及以上', pts: input.edu === 1 ? meanBeta.edu : 0 },
+            { label: input.depressed === 1 ? '抑郁 (CES-D ≥ 10)' : '无抑郁', pts: input.depressed === 1 ? meanBeta.depressed : 0 },
+            { label: `慢性病 (${input.chronic} 种)`, pts: meanBeta.chronic * input.chronic },
+            { label: input.smoke === 1 ? '当前吸烟' : '不吸烟', pts: input.smoke === 1 ? meanBeta.smoke : 0 },
+        ];
+        const ul = document.getElementById('rBreakdown');
+        ul.innerHTML = '';
+        breakdown.forEach(c => {
+            if (Math.abs(c.pts) < 0.005) return;
+            const sign = c.pts > 0 ? '+' : '−';
+            const cls = c.pts > 0 ? 'positive' : 'negative';
+            const li = document.createElement('li');
+            li.className = 'breakdown-item';
+            li.innerHTML = `<span class="breakdown-label">${c.label}</span><span class="breakdown-points ${cls}">${sign}${Math.abs(c.pts).toFixed(2)}</span>`;
+            ul.appendChild(li);
+        });
+
+        // 干预建议
+        const actBox = document.getElementById('rActions');
+        actBox.className = 'result-actions ' + consensus.cls;
+        const list = document.getElementById('rActionList');
+        list.innerHTML = '';
+        ACTIONS[consensus.cls].forEach(text => {
+            const li = document.createElement('li');
+            li.innerHTML = text;
+            list.appendChild(li);
+        });
+
+        // 显示
+        document.getElementById('scEmpty').style.display = 'none';
+        document.getElementById('scResult').classList.add('show');
+    }
+
+    // ---------- 读取输入 ----------
+    function getInput() {
+        const age = parseInt(document.getElementById('sc_age').value, 10);
+        const chronic = parseInt(document.getElementById('sc_chronic').value, 10);
+        if (isNaN(age) || age < 60 || age > 100) {
+            alert('请输入合理的年龄（60-100 岁）'); return null;
+        }
+        if (isNaN(chronic) || chronic < 0 || chronic > 14) {
+            alert('请输入合理的慢性病数量（0-14 种）'); return null;
+        }
+        function getRadio(name) {
+            const el = document.querySelector(`input[name="${name}"]:checked`);
+            return el ? parseInt(el.value, 10) : 0;
+        }
+        return {
+            age, chronic,
+            gender:    getRadio('sc_gender'),
+            rural:     getRadio('sc_rural'),
+            edu:       getRadio('sc_edu'),
+            depressed: getRadio('sc_depressed'),
+            smoke:     getRadio('sc_smoke'),
+        };
+    }
+
+    // ---------- 事件 ----------
+    document.getElementById('scCalc').addEventListener('click', () => {
+        const input = getInput();
+        if (input === null) return;
+        render(input);
+        const resultEl = document.getElementById('scResult');
+        const rect = resultEl.getBoundingClientRect();
+        if (rect.top < 0 || rect.bottom > window.innerHeight) {
+            resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    });
+
+    document.getElementById('scReset').addEventListener('click', () => {
+        formEl.reset();
+        document.getElementById('scEmpty').style.display = 'flex';
+        document.getElementById('scResult').classList.remove('show');
+    });
+
+    // 默认演示
+    requestAnimationFrame(() => {
+        const input = getInput();
+        if (input) render(input);
+    });
+})();

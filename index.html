@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -29,6 +29,7 @@
                 <a href="#trends" class="nav-link">时间趋势</a>
                 <a href="#robustness" class="nav-link">稳健性</a>
                 <a href="#policy" class="nav-link">政策建议</a>
+                <a href="#scorecard" class="nav-link">评分卡</a>
             </div>
         </div>
     </nav>
@@ -49,13 +50,13 @@
                 </div>
                 <div class="data-item">
                     <div class="data-label">累计样本</div>
-                    <div class="data-value" data-count="19553">19,553</div>
-                    <div class="data-note">老年人 · 三期合计</div>
+                    <div class="data-value" data-count="16991">16,991</div>
+                    <div class="data-note">v2数据 · 三期合计</div>
                 </div>
                 <div class="data-item accent">
                     <div class="data-label">抑郁OR范围</div>
-                    <div class="data-value">1.54&ndash;2.65</div>
-                    <div class="data-note">三期均显著 · CV=0.25</div>
+                    <div class="data-value">1.58&ndash;1.77</div>
+                    <div class="data-note">三期平均1.66 · CV=0.06</div>
                 </div>
                 <div class="data-item accent">
                     <div class="data-label">成本效益比</div>
@@ -173,7 +174,7 @@
                     </tbody>
                 </table>
             </div>
-            <p class="sample-note">注：失能定义为ADL/IADL任一项功能受限。三期合计纳入样本 19,553 人次，作为本研究的实证基础。</p>
+            <p class="sample-note">注：失能定义为ADL/IADL任一项功能受限。三期合计纳入样本 16,991 人次，作为本研究的实证基础。</p>
 
             <div class="map-section">
                 <div class="map-header">
@@ -266,7 +267,7 @@
                 <div class="map-footer">
                     <div class="map-footer-block">
                         <strong>样本覆盖</strong>
-                        <p>CHARLS 调查覆盖全国 28 个省（自治区、直辖市），450 个村/居委会，约 1.7 万家户。本研究在三期面板中累计纳入 19,553 人次。</p>
+                        <p>CHARLS 调查覆盖全国 28 个省（自治区、直辖市），450 个村/居委会，约 1.7 万家户。本研究在三期面板中累计纳入 16,991 人次。</p>
                     </div>
                     <div class="map-footer-block">
                         <strong>长护险试点</strong>
@@ -291,7 +292,7 @@
             <div class="findings-grid">
                 <div class="finding-card">
                     <div class="finding-tag">FINDING 01</div>
-                    <div class="finding-value">1.54&ndash;2.65</div>
+                    <div class="finding-value">1.58&ndash;1.77</div>
                     <div class="finding-label">抑郁OR范围（三期）</div>
                     <div class="finding-detail">三期均在p&lt;0.05水平显著，平均OR=2.00，CV=0.25。抑郁是最强且稳健的可干预风险因素。</div>
                 </div>
@@ -541,6 +542,162 @@
             </ol>
         </div>
     </section>
+    <section id="scorecard" class="section scorecard-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-num">09 &nbsp;/&nbsp; 风险评分卡</div>
+                <h2 class="section-title">基层筛查评分卡 (Risk Scorecard) — 交互式工具原型</h2>
+                <p class="scorecard-intro">基于 2018-2020 期 Logistic 回归（AUC = 0.703）开发的便携式筛查工具，针对社区卫生服务中心、长护险评估员、家庭医生等基层场景设计。<strong>输入 7 项基本信息</strong>，约 30 秒完成评估，输出 2 年内失能转移的概率与<strong>分级干预建议</strong>。</p>
+            </div>
+
+            <div class="scorecard-grid">
+                <!-- 左侧：表单 -->
+                <form class="scorecard-form" id="scForm" onsubmit="return false;">
+                    <div class="scorecard-form-title">SCREENING INPUT</div>
+                    <div class="scorecard-form-subtitle">受访者基本信息（共 7 项）</div>
+
+                    <div class="form-row">
+                        <label for="sc_age">年龄 <span class="row-hint">（≥60 周岁）</span></label>
+                        <input type="number" id="sc_age" class="form-control" min="60" max="100" value="68" />
+                    </div>
+
+                    <div class="form-row">
+                        <label>性别</label>
+                        <div class="form-radio-group">
+                            <label><input type="radio" name="sc_gender" value="0"><span>男</span></label>
+                            <label><input type="radio" name="sc_gender" value="1" checked><span>女</span></label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label>居住地</label>
+                        <div class="form-radio-group">
+                            <label><input type="radio" name="sc_rural" value="0"><span>城市</span></label>
+                            <label><input type="radio" name="sc_rural" value="1" checked><span>农村</span></label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label>受教育程度 <span class="row-hint">（小学及以下记为"低"）</span></label>
+                        <div class="form-radio-group">
+                            <label><input type="radio" name="sc_edu" value="0" checked><span>初中以上</span></label>
+                            <label><input type="radio" name="sc_edu" value="1"><span>低教育</span></label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label>抑郁状态 <span class="row-hint">（CES-D-10 总分 ≥ 10）</span></label>
+                        <div class="form-radio-group">
+                            <label><input type="radio" name="sc_depressed" value="0" checked><span>无抑郁</span></label>
+                            <label><input type="radio" name="sc_depressed" value="1"><span>抑郁</span></label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="sc_chronic">慢性病数量 <span class="row-hint">（高血压、糖尿病、关节炎等共 0&ndash;14 种）</span></label>
+                        <input type="number" id="sc_chronic" class="form-control" min="0" max="14" value="2" />
+                    </div>
+
+                    <div class="form-row">
+                        <label>当前吸烟</label>
+                        <div class="form-radio-group">
+                            <label><input type="radio" name="sc_smoke" value="0" checked><span>不吸烟</span></label>
+                            <label><input type="radio" name="sc_smoke" value="1"><span>吸烟</span></label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-primary" id="scCalc">计算风险</button>
+                        <button type="button" class="btn-secondary" id="scReset">重置</button>
+                    </div>
+                </form>
+
+                <!-- 右侧：三期并排结果 -->
+                <div class="scorecard-result">
+                    <!-- 空态 -->
+                    <div class="result-empty" id="scEmpty">
+                        <div class="result-empty-icon">i</div>
+                        <p class="result-empty-text">填写左侧 7 项信息后点击"计算风险"，系统将基于三期独立 Logistic 模型 (2013-2015 / 2015-2018 / 2018-2020) 同时输出三个预测概率，让你直观看到结论的<strong>跨期稳健性</strong>。</p>
+                    </div>
+
+                    <!-- 结果态 -->
+                    <div class="result-active" id="scResult">
+                        <!-- 三期共识徽章 -->
+                        <div class="consensus-banner" id="rConsensusBanner">
+                            <div class="consensus-tier-badge" id="rConsensusBadge">—</div>
+                            <div class="consensus-info">
+                                <div class="consensus-label">CONSENSUS — 三期共识</div>
+                                <div class="consensus-name" id="rConsensusName">—</div>
+                                <div class="consensus-prob" id="rConsensusProb">—</div>
+                            </div>
+                            <div class="consensus-cv" id="rConsensusCV">CV: —</div>
+                        </div>
+
+                        <!-- 三期并排面板 -->
+                        <div class="period-grid">
+                            <div class="period-panel" data-period="2013-2015">
+                                <div class="period-header">
+                                    <span class="period-label">PERIOD I</span>
+                                    <span class="period-name">2013&ndash;2015</span>
+                                </div>
+                                <div class="period-prob" id="rProb_p1">—</div>
+                                <div class="period-bar"><div class="period-bar-fill" id="rBar_p1"></div></div>
+                                <div class="period-tier" id="rTier_p1">—</div>
+                            </div>
+
+                            <div class="period-panel" data-period="2015-2018">
+                                <div class="period-header">
+                                    <span class="period-label">PERIOD II</span>
+                                    <span class="period-name">2015&ndash;2018</span>
+                                </div>
+                                <div class="period-prob" id="rProb_p2">—</div>
+                                <div class="period-bar"><div class="period-bar-fill" id="rBar_p2"></div></div>
+                                <div class="period-tier" id="rTier_p2">—</div>
+                            </div>
+
+                            <div class="period-panel" data-period="2018-2020">
+                                <div class="period-header">
+                                    <span class="period-label">PERIOD III</span>
+                                    <span class="period-name">2018&ndash;2020</span>
+                                </div>
+                                <div class="period-prob" id="rProb_p3">—</div>
+                                <div class="period-bar"><div class="period-bar-fill" id="rBar_p3"></div></div>
+                                <div class="period-tier" id="rTier_p3">—</div>
+                            </div>
+                        </div>
+
+                        <!-- 共识阈值线 -->
+                        <div class="consensus-threshold-strip">
+                            <div class="threshold-track">
+                                <span class="threshold-zone low">低风险 &lt; 15%</span>
+                                <span class="threshold-zone medium">中风险 15&ndash;30%</span>
+                                <span class="threshold-zone high">高风险 &gt; 30%</span>
+                            </div>
+                        </div>
+
+                        <!-- 三期共识贡献分解（基于平均OR） -->
+                        <div class="result-breakdown">
+                            <div class="result-breakdown-title">RISK BREAKDOWN — 三期平均 log(odds) 贡献</div>
+                            <ul class="breakdown-list" id="rBreakdown"></ul>
+                        </div>
+
+                        <!-- 干预建议 -->
+                        <div class="result-actions" id="rActions">
+                            <div class="result-actions-title">RECOMMENDED INTERVENTIONS</div>
+                            <ul id="rActionList"></ul>
+                        </div>
+                    </div>
+
+                    <p class="scorecard-disclaimer">
+                        本工具基于 CHARLS 三期独立 Logistic 回归（2013&ndash;2015, 2015&ndash;2018, 2018&ndash;2020；三期平均 AUC = 0.697），仅用于研究与基层筛查参考，<strong>不构成临床诊断</strong>。
+                        三期共识等级根据三期概率多数派决定（≥2 期同等级 → 共识；否则取中位数所在等级）。
+                        阈值切点：低风险 &lt; 15%，中风险 15%&ndash;30%，高风险 &gt; 30%。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -585,3 +742,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
